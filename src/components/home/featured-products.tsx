@@ -10,7 +10,7 @@ export default async function FeaturedProducts() {
 
   return (
     <section className="pt-24">
-      <SectionTitle text="featured products" />
+      <SectionTitle text="produtos favoritos" />
       <ProductsGrid products={products} />
     </section>
   );
