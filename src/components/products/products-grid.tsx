@@ -10,7 +10,7 @@ export default function ProductsGrid({ products }: { products: Product[] }) {
     <div className="pt-12 grid gap-4 md:grid-cols-2 lg:grid-cols-3">
       {products.map((product) => {
         const { name, price, image, id } = product;
-        const realAmmount = formatCurrency(price);
+        const BRLAmount = formatCurrency(price);
         return (
           <article key={id} className="group relative">
             <Link href={`/products/${id}`}>
@@ -28,7 +28,7 @@ export default function ProductsGrid({ products }: { products: Product[] }) {
                   </div>
                   <div className="mt-4 text-center">
                     <h2 className="text-lg capitalize">{name}</h2>
-                    <p className="text-muted-foreground mt-2">{realAmmount}</p>
+                    <p className="text-muted-foreground mt-2">{BRLAmount}</p>
                   </div>
                 </CardContent>
               </Card>
