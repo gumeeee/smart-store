@@ -11,7 +11,7 @@ SmartStore é uma plataforma moderna de e-commerce construída com tecnologias d
 - **Atualizações em Tempo Real**  
   Dados sincronizados via Supabase Realtime.
 - **Autenticação Segura**  
-  (AINDA NÃO IMPLEMENTADO).
+  Autenticação segura realizada com Clerk.
 - **UI Responsiva & Moderna**  
   Componentes acessíveis e customizáveis do shadcn/ui.
 - **Dashboard Administrativo**  
