@@ -12,8 +12,12 @@ import { LuAlignCenter } from "react-icons/lu";
 import UserIcon from "./user-icon";
 import { SignInButton, SignedOut, SignedIn, SignUpButton } from "@clerk/nextjs";
 import SignOutLink from "./signout-link";
+import { auth } from "@clerk/nextjs/server";
 
 export default function LinksDropdown() {
+  const { userId } = auth();
+  const isAdminUser = userId === process.env.ADMIN_USER_ID;
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -37,11 +41,15 @@ export default function LinksDropdown() {
           </DropdownMenuItem>
         </SignedOut>
         <SignedIn>
-          {links.map((link) => (
-            <DropdownMenuItem key={link.href} className="capitalize w-full">
-              <Link href={link.href}>{link.label}</Link>
-            </DropdownMenuItem>
-          ))}
+          {links.map((link) => {
+            if (link.label === "dashboard" && !isAdminUser) return null;
+
+            return (
+              <DropdownMenuItem key={link.href} className="capitalize w-full">
+                <Link href={link.href}>{link.label}</Link>
+              </DropdownMenuItem>
+            );
+          })}
           <DropdownMenuSeparator />
           <DropdownMenuItem>
             <SignOutLink />
