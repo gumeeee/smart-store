@@ -8,7 +8,6 @@ const createProductAction = async (formData: FormData) => {
   "use server";
 
   const name: string = formData.get("name") as string;
-  console.log(name);
 };
 
 export default function CreateProductPage() {
