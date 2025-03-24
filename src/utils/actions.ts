@@ -5,6 +5,7 @@ import { currentUser } from "@clerk/nextjs/server";
 import { redirect } from "next/navigation";
 import { renderError } from "../../logs/render-error";
 import { imageSchema, productSchema, validateWithZodSchema } from "./schemas";
+import { uploadImage } from "./supabase";
 
 const getAuthUser = async () => {
   const user = await currentUser();
@@ -64,19 +65,18 @@ export const createProductAction = async (
     const file = formData.get("image") as File;
     const validatedFields = validateWithZodSchema(productSchema, rawData);
     const validatedFile = validateWithZodSchema(imageSchema, { image: file });
+    const fullPath = await uploadImage(validatedFile.image);
 
     await db.product.create({
       data: {
         ...validatedFields,
-        image: "/images/hero-carousel-2.jpg",
+        image: fullPath,
         clerkId: user.id,
       },
     });
-
-    return { message: "Produto criado!" };
   } catch (error) {
     console.log(error);
-
     return renderError(error);
   }
+  redirect("/admin/products");
 };

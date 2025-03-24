@@ -4,7 +4,15 @@ const nextConfig = {
     remotePatterns: [
       {
         protocol: "https",
-        hostname: "**",
+        hostname: "images.pexels.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.clerk.com",
+      },
+      {
+        protocol: "https",
+        hostname: "qlwovasmrzgwlkhiysfu.supabase.co",
       },
     ],
   },
