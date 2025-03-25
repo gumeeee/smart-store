@@ -8,6 +8,5 @@ export default function ProductsPage({
   const layout = searchParams.layout || "grid";
   const search = searchParams.search || "";
 
-  console.log(searchParams);
   return <ProductsContainer layout={layout} search={search} />;
 }
