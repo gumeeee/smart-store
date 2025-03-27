@@ -4,6 +4,8 @@ import { useFormStatus } from "react-dom";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { ReloadIcon } from "@radix-ui/react-icons";
+import { FaPenToSquare } from "react-icons/fa6";
+import { FaTrash } from "react-icons/fa";
 
 type btnSize = "default" | "lg" | "sm";
 
@@ -38,3 +40,32 @@ export default function SubmitButton({
     </Button>
   );
 }
+
+type actionType = "edit" | "delete";
+
+export const IconButton = ({ actionType }: { actionType: actionType }) => {
+  const { pending } = useFormStatus();
+
+  const renderIcon = () => {
+    switch (actionType) {
+      case "edit":
+        return <FaPenToSquare />;
+      case "delete":
+        return <FaTrash />;
+      default:
+        const never: never = actionType;
+        throw new Error(`Ação não reconhecida: ${never}`);
+    }
+  };
+
+  return (
+    <Button
+      type="submit"
+      size={"icon"}
+      variant={"link"}
+      className="p-2 cursor-pointer"
+    >
+      {pending ? <ReloadIcon className="animate-spin" /> : renderIcon()}
+    </Button>
+  );
+};

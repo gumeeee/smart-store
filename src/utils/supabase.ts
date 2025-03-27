@@ -19,3 +19,12 @@ export const uploadImage = async (image: File) => {
 
   return supabase.storage.from(bucket).getPublicUrl(newName).data.publicUrl;
 };
+
+export const deleteImage = async (url: string) => {
+  const imageName = url.split("/").pop();
+  if (!imageName) throw new Error("URL Inválida");
+
+  return supabase.storage
+    .from(bucket)
+    .remove([`product-user-images/${imageName}`]);
+};
