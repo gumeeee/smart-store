@@ -2,6 +2,7 @@ import SubmitButton from "@/components/form/buttons";
 import CheckboxInput from "@/components/form/checkbox-input";
 import FormContainer from "@/components/form/form-container";
 import FormInput from "@/components/form/form-input";
+import ImageInputContainer from "@/components/form/image-input-container";
 import PriceInput from "@/components/form/prince-input";
 import TextAreaInput from "@/components/form/text-area-input";
 import { fetchAdminProductDetails, updateProductAction } from "@/utils/actions";
@@ -13,14 +14,21 @@ export default async function EditProductPage({
 }) {
   const { id } = params;
   const product = await fetchAdminProductDetails(id);
-  const { name, company, description, featured, price } = product;
+  const { name, company, description, featured, price, image } = product;
 
   return (
     <section>
       <h1 className="text-2xl font-semibold mb-8 capitalize">Editar Produto</h1>
       <div className="border p-8 rounded">
-        {/* IMAGE INPUT CONTAINER */}
-
+        <ImageInputContainer
+          action={updateProductAction}
+          name={name}
+          image={image}
+          text="Atualizar Imagem"
+        >
+          <input type="hidden" name="id" value={id} />
+          <input type="hidden" name="url" value={image} />
+        </ImageInputContainer>
         <FormContainer action={updateProductAction}>
           <div className="grid gap-4 md:grid-cols-2 my-4">
             <input type="hidden" name="id" value={id} />
