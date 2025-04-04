@@ -2,6 +2,7 @@ import FavoriteToggleButton from "@/components/products/favorite-toggle-button";
 import AddToCart from "@/components/single-product/add-to-cart";
 import BreadCrumbs from "@/components/single-product/bread-crumbs";
 import ProductRating from "@/components/single-product/product-rating";
+import ShareButton from "@/components/single-product/share-button";
 import { fetchProductById } from "@/utils/actions";
 import { formatCurrency } from "@/utils/format";
 import Image from "next/image";
@@ -33,7 +34,10 @@ export default async function SingleProductPage({
         <div>
           <div className="flex gap-x-8 items-center">
             <h1 className="capitalize text-3xl font-bold">{name}</h1>
-            <FavoriteToggleButton productId={params.id} />
+            <div className="flex items-center gap-x-2">
+              <FavoriteToggleButton productId={params.id} />
+              <ShareButton name={name} productId={params.id} />
+            </div>
           </div>
           <ProductRating productId={params.id} />
           <h4 className="text-xl mt-2">{company}</h4>
