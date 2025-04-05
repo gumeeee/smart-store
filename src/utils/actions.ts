@@ -313,6 +313,43 @@ export const fetchProductRating = async (productId: string) => {
   };
 };
 
-export const fetchProductReviewByUser = async () => {};
-export const deleteReviewAction = async () => {};
+export const fetchProductReviewByUser = async () => {
+  const user = await getAuthUser();
+  const reviews = await db.review.findMany({
+    where: {
+      clerkId: user.id,
+    },
+    select: {
+      id: true,
+      rating: true,
+      comment: true,
+      product: {
+        select: {
+          image: true,
+          name: true,
+        },
+      },
+    },
+  });
+
+  return reviews;
+};
+export const deleteReviewAction = async (prevState: { reviewId: string }) => {
+  const { reviewId } = prevState;
+  const user = await getAuthUser();
+
+  try {
+    await db.review.delete({
+      where: {
+        id: reviewId,
+        clerkId: user.id,
+      },
+    });
+
+    revalidatePath("/reviews");
+    return { message: "Review deletada com sucesso!" };
+  } catch (error) {
+    return renderError(error);
+  }
+};
 export const findExistingReview = async () => {};
