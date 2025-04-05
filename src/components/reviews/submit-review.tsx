@@ -7,6 +7,8 @@ import { Card } from "../ui/card";
 import RatingInput from "./rating-input";
 import TextAreaInput from "../form/text-area-input";
 import SubmitButton from "../form/buttons";
+import FormContainer from "../form/form-container";
+import { createdReviewAction } from "@/utils/actions";
 
 function SubmitReview({ productId }: { productId: string }) {
   const [isReviewFormVisible, setIsReviewFormVisible] = useState(false);
@@ -24,20 +26,22 @@ function SubmitReview({ productId }: { productId: string }) {
 
       {isReviewFormVisible && (
         <Card className="p-8 mt-8">
-          <input type="hidden" name="productId" value={productId} />
-          <input
-            type="hidden"
-            name="authorName"
-            value={user?.firstName || "usuário"}
-          />
-          <input type="hidden" name="authorImageUrl" value={user?.imageUrl} />
-          <RatingInput name="avaliação" />
-          <TextAreaInput
-            name="comment"
-            labelText="feedback"
-            defaultValue="Excelente Produto!"
-          />
-          <SubmitButton className="mt-4" />
+          <FormContainer action={createdReviewAction}>
+            <input type="hidden" name="productId" value={productId} />
+            <input
+              type="hidden"
+              name="authorName"
+              value={user?.firstName || "usuário"}
+            />
+            <input type="hidden" name="authorImageUrl" value={user?.imageUrl} />
+            <RatingInput name="rating" />
+            <TextAreaInput
+              name="comment"
+              labelText="feedback"
+              defaultValue="Excelente Produto!"
+            />
+            <SubmitButton className="mt-4" />
+          </FormContainer>
         </Card>
       )}
     </div>
