@@ -1,10 +1,10 @@
 import Link from "next/link";
 import { Button } from "../ui/button";
 import { AiOutlineShoppingCart } from "react-icons/ai";
+import { fetchCartItems } from "@/utils/actions";
 
-export default function CartButton() {
-  //temp
-  const numItemsInCart: number = 10;
+export default async function CartButton() {
+  const numItemsInCart: number = await fetchCartItems();
 
   return (
     <Button
