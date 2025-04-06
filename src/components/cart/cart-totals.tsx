@@ -14,7 +14,7 @@ function CartTotals({ cart }: { cart: Cart }) {
       <Card className="p-8">
         <CartTotalRow label="SubTotal" amount={cartTotal} />
         <CartTotalRow label="Frete" amount={shipping} />
-        <CartTotalRow label="SubTotal" amount={tax} />
+        <CartTotalRow label="Taxa" amount={tax} />
         <CardTitle className="mt-8">
           <CartTotalRow label="Total" amount={orderTotal} lastRow />
         </CardTitle>
