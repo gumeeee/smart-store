@@ -609,7 +609,7 @@ export const fetchUserOrders = async () => {
   const orders = await db.order.findMany({
     where: {
       clerkId: user.id,
-      isPaid: true,
+      isPaid: false,
     },
     orderBy: {
       createdAt: "desc",
@@ -630,4 +630,6 @@ export const fetchAdminOrders = async () => {
       createdAt: "desc",
     },
   });
+
+  return orders;
 };
